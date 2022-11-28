@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Document</title>
+</head>
+<body>
+  <h1>Application Post</h1>
+
+ 
+</body>
+<script>
+  fetch("http://localhost:5050/posts", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then((response) => {
+    return response.json();
+  }).then((json) => {
+    console.log(json)
+  })
+
+  var ws = new WebSocket("ws://localhost:5050/ws")
+  ws.onopen = () => {
+    console.log("Contectado al websocket")
+  }
+
+  ws.onmessage = (e) => {
+    console.log(e.data)
+  }
+
+  ws.onerror = (e) => {
+    console.log("Error: ", e.data)
+  }
+</script>
+</html>
